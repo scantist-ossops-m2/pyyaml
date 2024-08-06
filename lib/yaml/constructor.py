@@ -675,18 +675,6 @@ FullConstructor.add_multi_constructor(
     u'tag:yaml.org,2002:python/name:',
     FullConstructor.construct_python_name)
 
-FullConstructor.add_multi_constructor(
-    u'tag:yaml.org,2002:python/module:',
-    FullConstructor.construct_python_module)
-
-FullConstructor.add_multi_constructor(
-    u'tag:yaml.org,2002:python/object:',
-    FullConstructor.construct_python_object)
-
-FullConstructor.add_multi_constructor(
-    u'tag:yaml.org,2002:python/object/new:',
-    FullConstructor.construct_python_object_new)
-
 class UnsafeConstructor(FullConstructor):
 
     def find_python_module(self, name, mark):
@@ -698,6 +686,18 @@ class UnsafeConstructor(FullConstructor):
     def make_python_instance(self, suffix, node, args=None, kwds=None, newobj=False):
         return super(UnsafeConstructor, self).make_python_instance(
             suffix, node, args, kwds, newobj, unsafe=True)
+
+UnsafeConstructor.add_multi_constructor(
+    u'tag:yaml.org,2002:python/module:',
+    UnsafeConstructor.construct_python_module)
+
+UnsafeConstructor.add_multi_constructor(
+    u'tag:yaml.org,2002:python/object:',
+    UnsafeConstructor.construct_python_object)
+
+UnsafeConstructor.add_multi_constructor(
+    u'tag:yaml.org,2002:python/object/new:',
+    UnsafeConstructor.construct_python_object_new)
 
 UnsafeConstructor.add_multi_constructor(
     u'tag:yaml.org,2002:python/object/apply:',
